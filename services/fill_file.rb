@@ -1,4 +1,5 @@
 class FillFile
+
   def call(path)
     puts I18n.t(:enter_words)
     words = gets.chomp.split(',')
