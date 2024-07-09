@@ -7,10 +7,11 @@ class CreateFile
     FileUtils.mkdir_p("new_files") unless Dir.exist?("new_files")
 
     if File.exist?("new_files/#{filename}.txt")
-      puts I18n(:file_exists)
+      puts I18n.t(:file_exists)
       return
     end
 
+    FileUtils.touch("new_files/#{filename}.txt")
     FillFile.new.call("new_files/#{filename}.txt")
 
     puts I18n.t(:file_created)

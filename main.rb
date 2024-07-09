@@ -1,6 +1,5 @@
+require 'bundler/setup'
 require 'i18n'
-require 'fileutils'
-require 'fastercsv'
 require 'csv'
 require 'ruby-progressbar'
 
