@@ -1,7 +1,6 @@
-require_relative '../services/language_selector'
+require_relative '../../services/language_selector'
 
 RSpec.describe LanguageSelector do
-  let(:language_selector) { LanguageSelector.new }
   let(:input) { StringIO.new }
   let(:output) { StringIO.new }
 
@@ -18,7 +17,7 @@ RSpec.describe LanguageSelector do
   it 'selects a valid language' do
     allow(input).to receive(:gets).and_return('en')
 
-    language_selector.call
+    subject.call
     output.rewind
 
     expect(output.read).to include I18n.t(:select_language)
@@ -28,7 +27,7 @@ RSpec.describe LanguageSelector do
   it 'retries on invalid language selection' do
     allow(input).to receive(:gets).and_return('ls', 'en')
 
-    language_selector.call
+    subject.call
     output.rewind
 
     expect(output.read).to include I18n.t(:select_language), I18n.t(:invalid_choice)

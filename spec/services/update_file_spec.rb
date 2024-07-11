@@ -1,8 +1,7 @@
-require_relative '../services/update_file'  # Adjust the path as needed
-require_relative '../services/fill_file'    # Adjust the path as needed
+require_relative '../../services/update_file'  # Adjust the path as needed
+require_relative '../../services/fill_file'    # Adjust the path as needed
 
 RSpec.describe UpdateFile do
-  let(:update_file) { UpdateFile.new }
   let(:input) { StringIO.new }
   let(:output) { StringIO.new }
   let(:file_path) { 'test_update_file.txt' }
@@ -27,7 +26,7 @@ RSpec.describe UpdateFile do
     allow(input).to receive(:gets).and_return(file_path, new_words)
     allow_any_instance_of(FillFile).to receive(:call).and_call_original
 
-    update_file.call
+    subject.call
     output.rewind
 
     expect(output.read).to include I18n.t(:enter_edit_path)
@@ -36,7 +35,7 @@ RSpec.describe UpdateFile do
   it 'outputs an error message if the file does not exist' do
     allow(input).to receive(:gets).and_return('non_existent_file.txt')
 
-    update_file.call
+    subject.call
     output.rewind
 
     expect(output.read).to include I18n.t(:file_not_found)
@@ -46,7 +45,7 @@ RSpec.describe UpdateFile do
     allow(input).to receive(:gets).and_return(file_path, new_words)
     allow_any_instance_of(FillFile).to receive(:call).and_call_original
 
-    update_file.call
+    subject.call
     output.rewind
 
     expect(output.read).to include I18n.t(:words_appended)

@@ -1,8 +1,7 @@
-require_relative '../services/create_file'
-require_relative '../services/fill_file'
+require_relative '../../services/create_file'
+require_relative '../../services/fill_file'
 
 RSpec.describe CreateFile do
-  let(:create_file) { CreateFile.new }
   let(:fill_file_double) { instance_double(FillFile) }
   let(:filename) { 'test_file' }
   let(:file_path) { "new_files/#{filename}.txt" }
@@ -27,7 +26,7 @@ RSpec.describe CreateFile do
   end
 
   it 'creates a new file if it does not exist' do
-    create_file.call
+    subject.call
     output.rewind
 
     expect(output.read).to include I18n.t(:file_created)
@@ -38,14 +37,14 @@ RSpec.describe CreateFile do
     FileUtils.mkdir_p('new_files')
     FileUtils.touch(file_path)
 
-    create_file.call
+    subject.call
     output.rewind
 
     expect(output.read).to include I18n.t(:file_exists)
   end
 
   it 'creates the new_files directory if it does not exist' do
-    create_file.call
+    subject.call
 
     expect(Dir).to exist('new_files')
   end

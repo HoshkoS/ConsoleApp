@@ -1,7 +1,6 @@
-require_relative '../services/read_file'
+require_relative '../../services/read_file'
 
 RSpec.describe ReadFile do
-  let(:read_file) { ReadFile.new }
   let(:input) { StringIO.new }
   let(:output) { StringIO.new }
   let(:file_path) { 'test_file.txt' }
@@ -21,7 +20,7 @@ RSpec.describe ReadFile do
   end
 
   before(:each) do
-    read_file.call
+    subject.call
     output.rewind
   end
 
@@ -38,7 +37,7 @@ RSpec.describe ReadFile do
       file.puts 'This is a test file content.'
     end
 
-    read_file.call
+    subject.call
     output.rewind
 
     expect(output.read).to include file_content

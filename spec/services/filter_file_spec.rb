@@ -1,7 +1,6 @@
-require_relative '../services/filter_file'
+require_relative '../../services/filter_file'
 
 RSpec.describe FilterFile do
-  let(:filter_file) { FilterFile.new }
   let(:input_file) { 'test_input.csv' }
   let(:output_dir) { 'new_files' }
   let(:filtered_file) { "#{output_dir}/test_input_filtered.csv" }
@@ -21,7 +20,7 @@ RSpec.describe FilterFile do
     })
     I18n.locale = :en
 
-    allow(filter_file).to receive(:sleep).and_return(nil)
+    allow(subject).to receive(:sleep).and_return(nil)
   end
 
   after do
@@ -30,9 +29,9 @@ RSpec.describe FilterFile do
   end
 
   it 'filters words in the file and creates a new file' do
-    allow(filter_file).to receive(:gets).and_return(input_file, 'hello, foo')
+    allow(subject).to receive(:gets).and_return(input_file, 'hello, foo')
 
-    expect { filter_file.call }.to output(/Filtering complete./).to_stdout
+    expect { subject.call }.to output(/Filtering complete./).to_stdout
 
     expect(File).to exist(filtered_file)
     filtered_content = CSV.read(filtered_file)
@@ -40,14 +39,14 @@ RSpec.describe FilterFile do
   end
 
   it 'prints an error if the file does not exist' do
-    allow(filter_file).to receive(:gets).and_return('non_existent.csv')
+    allow(subject).to receive(:gets).and_return('non_existent.csv')
 
-    expect { filter_file.call }.to output(/File not found./).to_stdout
+    expect { subject.call }.to output(/File not found./).to_stdout
   end
 
   it 'prints the number of filtered words' do
-    allow(filter_file).to receive(:gets).and_return(input_file, 'hello, foo')
+    allow(subject).to receive(:gets).and_return(input_file, 'hello, foo')
 
-    expect { filter_file.call }.to output(/Words filtered - 2/).to_stdout
+    expect { subject.call }.to output(/Words filtered - 2/).to_stdout
   end
 end
