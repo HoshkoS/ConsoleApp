@@ -1,0 +1,5 @@
+ua:
+  select_language: "Виберіть мову:"
+  invalid_choice: "Невірний вибір. Будь ласка, спробуйте ще раз."
+  attempt_i: "Повторна спроба (%{attempt} з %{max_attempts})..."
+  no_attempts_left: "Всі спроби вичерпано."

@@ -1,3 +1,3 @@
 # ConsoleApp
 
-Created using multiple ruby libraries for learning purposes/
+Created using multiple ruby libraries for learning purposes.
