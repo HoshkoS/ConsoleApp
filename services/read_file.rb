@@ -1,11 +1,14 @@
+require_relative '../translation'
+
 class ReadFile
+  include ::Translation
 
   def call
-    puts I18n.t(:enter_path)
+    translate(:enter_path)
     path = gets.chomp
 
     unless File.exist?(path)
-      puts I18n.t(:file_not_found)
+      translate(:file_not_found)
       return
     end
 

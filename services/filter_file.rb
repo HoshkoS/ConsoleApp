@@ -1,14 +1,18 @@
+require_relative '../translation'
+
 class FilterFile
-  def call(wait_time = 5)
-    puts I18n.t(:enter_path)
+  include ::Translation
+
+  def call(wait_time = 1)
+    translate(:enter_path)
     input_file = gets.chomp
 
     unless File.exist?(input_file)
-      puts I18n.t(:file_not_found)
+      translate(:file_not_found)
       return
     end
 
-    puts I18n.t(:enter_filtering_words)
+    translate(:enter_filtering_words)
     target_words = gets.chomp.split(',').map { _1.strip}
 
     total_rows = CSV.read(input_file).size
@@ -39,7 +43,7 @@ class FilterFile
 
       modified_rows << row
 
-      sleep(1)
+      sleep(wait_time)
       progress_bar.increment
     end
 
@@ -52,7 +56,7 @@ class FilterFile
     end
 
     progress_bar.finish
-    puts I18n.t(:filtering_complete)
-    puts I18n.t(:words_filtered, count: mod_words_count)
+    translate(:filtering_complete)
+    translate(:words_filtered, count: mod_words_count)
   end
 end
