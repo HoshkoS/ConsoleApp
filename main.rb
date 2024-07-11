@@ -11,7 +11,7 @@ require_relative 'services/update_file'
 require_relative 'services/filter_file'
 require_relative 'services/null_action'
 require_relative './file_factory'
-
+require_relative './translation'
 
 I18n.load_path << Dir[File.expand_path('locales') + '/*.yml']
 I18n.default_locale = :en

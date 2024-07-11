@@ -1,14 +1,17 @@
+require_relative '../translation'
+
 class FillFile
+  include ::Translation
 
   def call(path)
-    puts I18n.t(:enter_words)
+    translate(:enter_words)
     words = gets.chomp.split(',')
 
     words.map!(&:strip)
     valid_words = words.all? { |word| word.match?(/\A[a-zA-Z]+\z/) }
 
     unless valid_words
-      puts I18n.t(:invalid_words)
+      translate(:invalid_words)
       call(path)
       return
     end
