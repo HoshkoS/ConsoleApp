@@ -1,6 +1,8 @@
 en:
   select_language: "Select Language:"
   invalid_choice: "Invalid choice. Please try again."
+  attempt_i: "Retrying (attempt %{attempt} of %{max_attempts})..."
+  no_attempts_left: "There's no attempts left."
   main_menu:
     option_1: "Read content of an existing file"
     option_2: "Create new file"
