@@ -22,3 +22,4 @@ en:
   filtering: "Filtering"
   filtering_complete: "Filtering complete."
   words_filtered: "Words filtered - %{count}"
+  nice_day: "Hope you found what you were looking for. Have a nice day!"

@@ -22,3 +22,4 @@ ua:
   filtering: "Замінюємо"
   filtering_complete: "Заміна завершена."
   words_filtered: "Замінено слів - %{count}"
+  nice_day: "Надіюсь ви знайшли те, що шукали. Гарного дня!"

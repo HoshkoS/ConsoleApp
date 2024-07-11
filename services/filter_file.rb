@@ -1,5 +1,5 @@
 class FilterFile
-  def call(wait_time = 5)
+  def call(wait_time = 1)
     puts I18n.t(:enter_path)
     input_file = gets.chomp
 
@@ -39,7 +39,7 @@ class FilterFile
 
       modified_rows << row
 
-      sleep(1)
+      sleep(wait_time)
       progress_bar.increment
     end
 
