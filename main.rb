@@ -15,6 +15,8 @@ require_relative 'services/filter_file'
 I18n.load_path << Dir[File.expand_path('locales') + '/*.yml']
 I18n.default_locale = :en
 
+MAX_ATTEMPTS = 5
+
 def main_menu
   loop do
     puts "1. #{I18n.t('main_menu.option_1')}"
@@ -41,6 +43,8 @@ def main_menu
   end
 end
 
-LanguageSelector.new.call
+result = LanguageSelector.new.call
 
-main_menu
+if result
+  main_menu
+end
