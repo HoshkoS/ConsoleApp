@@ -1,7 +1,6 @@
-require_relative '../translation'
+require_relative './abstract_service.rb'
 
-class CreateFile
-  include ::Translation
+class CreateFile < AbstractService
 
   def call
     translate(:enter_filename)

@@ -1,7 +1,6 @@
-require_relative '../translation'
+require_relative './abstract_service.rb'
 
-class FilterFile
-  include ::Translation
+class CreateFile < AbstractService
 
   def call(wait_time = 1)
     return unless get_file

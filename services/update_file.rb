@@ -1,16 +1,12 @@
-require_relative '../translation'
+require_relative './abstract_service.rb'
 
-class UpdateFile
-  include ::Translation
+class UpdateFile < AbstractService
 
   def call
     translate(:enter_edit_path)
     path = gets.chomp
 
-    unless File.exist?(path)
-      translate(:file_not_found)
-      return
-    end
+    return unless check_file_presence(path)
 
     FillFile.new.call(path)
 
