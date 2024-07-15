@@ -1,6 +1,6 @@
 require_relative './abstract_service.rb'
 
-class CreateFile < AbstractService
+class FilterFile < AbstractService
 
   def call(wait_time = 1)
     return unless get_file
