@@ -25,6 +25,5 @@ class LanguageSelector < AbstractService
         return
       end
 
-    return true
   end
 end
