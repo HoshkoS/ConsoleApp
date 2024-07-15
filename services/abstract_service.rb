@@ -4,7 +4,7 @@ class AbstractService
   include ::Translation
 
   def call
-    raise NotImplemented, "Please define #call method"
+    raise NotImplementedError, "Please define #call method"
   end
 
   private
