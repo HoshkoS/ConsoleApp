@@ -1,12 +1,8 @@
-require_relative '../translation'
+require_relative './abstract_service.rb'
 
-class NullAction
-  include ::Translation
+class NullAction < AbstractService
 
   def call(wait_time = 3)
-    sleep(wait_time)
-    translate(:nice_day)
-
     exit
   end
 end

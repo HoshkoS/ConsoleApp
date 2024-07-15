@@ -1,16 +1,12 @@
-require_relative '../translation'
+require_relative './abstract_service.rb'
 
-class ReadFile
-  include ::Translation
+class ReadFile < AbstractService
 
   def call
     translate(:enter_path)
     path = gets.chomp
 
-    unless File.exist?(path)
-      translate(:file_not_found)
-      return
-    end
+    return unless check_file_presence(path)
 
     content = File.read(path)
     puts content

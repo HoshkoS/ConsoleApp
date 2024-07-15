@@ -1,8 +1,6 @@
-# TODO: find a way to remove 'require's from services
-require_relative '../translation'
+require_relative './abstract_service.rb'
 
-class LanguageSelector
-  include Translation
+class LanguageSelector < AbstractService
 
   MAX_ATTEMPTS = 5
 

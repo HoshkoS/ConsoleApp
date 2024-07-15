@@ -1,27 +1,29 @@
-require_relative '../translation'
+require_relative './abstract_service.rb'
 
-class FilterFile
-  include ::Translation
+class CreateFile < AbstractService
 
   def call(wait_time = 1)
+    return unless get_file
+
+    mod_rows, mod_words_count = filter_file(target_words, wait_time)
+
+    create_copy(mod_rows)
+    show_result(mod_words_count)
+  end
+
+  private
+
+  attr_reader :input_file, :progress_bar
+
+  def get_file
     translate(:enter_path)
-    input_file = gets.chomp
+    input = gets.chomp
 
-    unless File.exist?(input_file)
-      translate(:file_not_found)
-      return
-    end
+    @input_file = check_file_presence(input)
+  end
 
-    translate(:enter_filtering_words)
-    target_words = gets.chomp.split(',').map { _1.strip}
-
-    total_rows = CSV.read(input_file).size
-
-    progress_bar = ProgressBar.create(
-      title: I18n.t(:filtering),
-      total: total_rows,
-      format: "%t: |%B| %p%% %e"
-    )
+  def filter_file(filter_words, wait_time)
+    create_progress_bar
 
     modified_rows = []
     mod_words_count = 0
@@ -30,7 +32,7 @@ class FilterFile
       row.map! do |value|
         words = value.split(" ")
         words.map! do |word|
-          if target_words.include?(word)
+          if filter_words.include?(word)
             mod_words_count += 1
             '*'
           else
@@ -47,6 +49,10 @@ class FilterFile
       progress_bar.increment
     end
 
+    return modified_rows, mod_words_count
+  end
+
+  def create_copy(modified_rows)
     copy_filename = File.basename(input_file).gsub('.csv','')
 
     CSV.open("new_files/#{copy_filename}_filtered.csv", 'w') do |csv|
@@ -56,7 +62,25 @@ class FilterFile
     end
 
     progress_bar.finish
+  end
+
+  def create_progress_bar
+    total_rows = CSV.read(input_file).size
+
+    @progress_bar = ProgressBar.create(
+      title: I18n.t(:filtering),
+      total: total_rows,
+      format: "%t: |%B| %p%% %e"
+    )
+  end
+
+  def target_words
+    translate(:enter_filtering_words)
+    target_words = gets.chomp.split(',').map { _1.strip}
+  end
+
+  def show_result(word_count)
     translate(:filtering_complete)
-    translate(:words_filtered, count: mod_words_count)
+    translate(:words_filtered, count: word_count)
   end
 end

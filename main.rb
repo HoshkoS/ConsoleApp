@@ -13,6 +13,8 @@ require_relative 'services/null_action'
 require_relative './file_factory'
 require_relative './translation'
 
+include Translation
+
 I18n.load_path << Dir[File.expand_path('locales') + '/*.yml']
 I18n.default_locale = :en
 
@@ -24,6 +26,11 @@ INPUT_TO_ACTION_MAPPER = {
   3 => :update,
   4 => :filter
 }
+
+at_exit do |wait_time = 3|
+  sleep(wait_time)
+  translate(:nice_day)
+end
 
 def main_menu
   loop do
