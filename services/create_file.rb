@@ -13,6 +13,7 @@ class CreateFile < AbstractService
       return
     end
 
+    FileUtils.touch("new_files/#{filename}.txt")
     FillFile.new.call("new_files/#{filename}.txt")
 
     translate(:file_created)

@@ -1,3 +1,9 @@
+require_relative './services/create_file'
+require_relative './services/read_file'
+require_relative './services/update_file'
+require_relative './services/filter_file'
+require_relative './services/null_action'
+
 class FileFactory
   ACTIONS = {
     :read => ReadFile,

@@ -2,6 +2,8 @@ require_relative './abstract_service.rb'
 
 class LanguageSelector < AbstractService
 
+  MAX_ATTEMPTS = 5
+
   def call
     attempt ||= 1
     translate(:select_language)
@@ -23,6 +25,5 @@ class LanguageSelector < AbstractService
         return
       end
 
-    return true
   end
 end

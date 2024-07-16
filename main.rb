@@ -1,17 +1,11 @@
+require 'bundler/setup'
 require 'i18n'
-require 'fileutils'
 require 'csv'
 require 'ruby-progressbar'
 
 require_relative 'services/language_selector'
-require_relative 'services/create_file'
-require_relative 'services/read_file'
-require_relative 'services/fill_file'
-require_relative 'services/update_file'
-require_relative 'services/filter_file'
-require_relative 'services/null_action'
-require_relative './file_factory'
-require_relative './translation'
+require_relative 'file_factory'
+require_relative 'translation'
 
 include Translation
 
