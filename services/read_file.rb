@@ -1,13 +1,12 @@
-class ReadFile
+require_relative './abstract_service.rb'
+
+class ReadFile < AbstractService
 
   def call
-    puts I18n.t(:enter_path)
+    translate(:enter_path)
     path = gets.chomp
 
-    unless File.exist?(path)
-      puts I18n.t(:file_not_found)
-      return
-    end
+    return unless check_file_presence(path)
 
     content = File.read(path)
     puts content

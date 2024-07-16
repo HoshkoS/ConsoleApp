@@ -1,16 +1,15 @@
-class UpdateFile
+require_relative './abstract_service.rb'
+
+class UpdateFile < AbstractService
 
   def call
-    puts I18n.t(:enter_edit_path)
+    translate(:enter_edit_path)
     path = gets.chomp
 
-    unless File.exist?(path)
-      puts I18n.t(:file_not_found)
-      return
-    end
+    return unless check_file_presence(path)
 
     FillFile.new.call(path)
 
-    puts I18n.t(:words_appended)
+    translate(:words_appended)
   end
 end
